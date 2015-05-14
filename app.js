@@ -8,9 +8,9 @@ var users = new Set();
 var server = net.createServer(function(socket) {
     socket.on("data", function(data) {
         console.log('Received: ' + data);
-        for (var response of users) {
+        users.forEach(function(response) {
             response.sse("data: " + data + "\n\n");
-        }
+        });
     });
 });
 server.listen(1337, '127.0.0.1');
